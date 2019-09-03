@@ -29,7 +29,7 @@ def list_all_items():
         index += 1
 
 def mark_completed(index):
-    print("[ Items completed √ ]")
+    print("[ Item completed √ ]")
     checklist[int(index)] = "√" + checklist[int(index)]
     print(checklist[int(index)])
 
