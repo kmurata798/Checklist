@@ -100,6 +100,7 @@ def test():
 
     create("purple sox")
     create("red cloak")
+    create("green pants")
 
     print(read(0))
     print(read(1))
@@ -113,6 +114,11 @@ def test():
     list_all_items()
 
     mark_completed(1)
+    mark_completed(1)
+
+    unmark_completed(0)
+
+    destroy(0)
 
     # Your testing code here
     # ...
@@ -129,6 +135,8 @@ def test():
 
     user_value = user_input("Please Enter a value:")
     print(user_value)
+
+    
 
 #test()
 
