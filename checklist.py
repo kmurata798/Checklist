@@ -31,12 +31,15 @@ def list_all_items():
 def mark_completed(index):
     print("[ Item completed √ ]")
     checklist[int(index)] = "√" + checklist[int(index)]
-    print(checklist[int(index)])
+    #print(checklist[int(index)])
 
 def unmark_completed(index):
     print("[ Items uncompleted X ]")
-    checklist[int(index)] = index + checklist[int(index)]
-    print(checklist[int(index)])
+    checklist[int(index)] = checklist[int(index)].replace("√","")
+    
+    #print(checklist[int(index)])
+    """checklist[int(index)] = int(index) + checklist[int(index)]
+    print(checklist[int(index)])"""
 
 def select(function_code):
     # Create item
@@ -115,8 +118,6 @@ def test():
 
     mark_completed(1)
     mark_completed(1)
-
-    unmark_completed(0)
 
     destroy(0)
 
