@@ -9,17 +9,17 @@ def create(item):
 
 # READ
 def read(index):
-    return checklist[index]
+    return checklist[int(index)]
     # Read code here
 
 # UPDATE
 def update(index, item):
-    checklist[index] = item
+    checklist[int(index)] = item
     # Update code here
 
 # DESTROY
 def destroy(index):
-    checklist.pop(index)
+    checklist.pop(int(index))
     # Destroy code here
 
 def list_all_items():
@@ -30,49 +30,53 @@ def list_all_items():
 
 def mark_completed(index):
     print("[ Items completed √ ]")
-    checklist[index] = "√" + checklist[index]
-    print(checklist[index])
+    checklist[int(index)] = "√" + checklist[int(index)]
+    print(checklist[int(index)])
 
 def select(function_code):
     # Create item
-    if function_code == "C" or "c":
+    if function_code == "C" or function_code == "c":
         input_item = user_input("Input clothing: ")
         create(input_item)
         return True
 
     # Read item
-    elif function_code == "R" or "r":
+    elif function_code == "R" or function_code == "r":
         item_index = user_input("Index Number: ")
 
         # Remember that item_index must actually exist or our program will crash.
-        read(item_index)
+        print(item_index + "" + read(item_index))
         return True
 
     #Update item
-    elif function_code == "U" or "u":
+    elif function_code == "U" or function_code == "u":
         update_index = user_input("Index you wish to update: ")
-        index = update_index
         update_item = user_input("Clothing you wish to add: ")
-        item = update_item
-        update(index, item)
+        update(update_index, update_item)
         return True
 
-    elif function_code == "D" or "d":
-        destroy(index)
+    elif function_code == "D" or function_code == "d":
+        delete = user_input("Index to delete: ")
+        destroy(delete)
         return True
 
     # Print all items
-    elif function_code == "P" or "p":
+    elif function_code == "P" or function_code == "p":
         list_all_items()
         return True
 
-    elif function_code == "Q" or "q":
+    elif function_code == "Q" or function_code == "q":
         #this is where we want to stop our loop
         return False
 
+    elif function_code == "M" or function_code == "m":
+        mark_input = input("mark off index: ")
+        mark_completed(mark_input)
+        return True
+
     # Catch all
     else:
-        print("\033[0;31m Unknown Option \033[0m")
+        print("\033[0;31m\ \ \ Unknown Option \ \ \ \033[0m")
     return True
 
 def user_input(prompt):
@@ -121,5 +125,5 @@ def test():
 running = True
 while running:
     selection = user_input(
-        "Press C to add to list, R to Read from list, P to display list, and Q to quit: ")
+        "Press C to add to list, R to Read from list, P to display list, U to update a slot, D to delete clothing, and Q to quit: ")
     running = select(selection)
