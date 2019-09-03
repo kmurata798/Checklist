@@ -30,43 +30,56 @@ def list_all_items():
 
 def mark_completed(index):
     print("[ Items completed √ ]")
-    checklist[index] = '√' + checklist[index]
+    checklist[index] = "√" + checklist[index]
     print(checklist[index])
 
 def select(function_code):
     # Create item
-    if function_code == "c":
-        input_item = user_input("Input item:")
+    if function_code == "C" or "c":
+        input_item = user_input("Input clothing: ")
         create(input_item)
+        return True
 
     # Read item
-    elif function_code == "r":
-        item_index = user_input("Index Number?")
+    elif function_code == "R" or "r":
+        item_index = user_input("Index Number: ")
 
         # Remember that item_index must actually exist or our program will crash.
         read(item_index)
+        return True
 
     #Update item
-    elif function_code == "u":
-        update()
+    elif function_code == "U" or "u":
+        update_index = user_input("Index you wish to update: ")
+        index = update_index
+        update_item = user_input("Clothing you wish to add: ")
+        item = update_item
+        update(index, item)
+        return True
+
+    elif function_code == "D" or "d":
+        destroy(index)
+        return True
 
     # Print all items
-    elif function_code == "p":
+    elif function_code == "P" or "p":
         list_all_items()
+        return True
 
-    elif function_code == "q":
+    elif function_code == "Q" or "q":
         #this is where we want to stop our loop
         return False
 
     # Catch all
     else:
-        print("Unknown Option")
+        print("\033[0;31m Unknown Option \033[0m")
     return True
 
 def user_input(prompt):
     # the input function will display a message in the terminal
     # and wait for user input.
     user_input = input(prompt)
+
     return user_input
 
 def test():
@@ -90,11 +103,12 @@ def test():
     # Your testing code here
     # ...
     # Call your new function with the appropriate value
-    select("c")
+    select("C")
     # View the results
     list_all_items()
+    mark_completed(1)
     # Call function with new value
-    select("r")
+    select("R")
     # View results
     list_all_items()
     # Continue until all code is run
@@ -106,7 +120,6 @@ def test():
 
 running = True
 while running:
-    #str.casefold("blabla") --> unrestricts case sensitivity
-    selection = str.casefold(user_input(
-        "Press C to add to list, R to Read from list, P to display list, and Q to quit: "))
+    selection = user_input(
+        "Press C to add to list, R to Read from list, P to display list, and Q to quit: ")
     running = select(selection)
