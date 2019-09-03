@@ -33,6 +33,11 @@ def mark_completed(index):
     checklist[int(index)] = "√" + checklist[int(index)]
     print(checklist[int(index)])
 
+def unmark_completed(index):
+    print("[ Items uncompleted X ]")
+    checklist[int(index)] = index + checklist[int(index)]
+    print(checklist[int(index)])
+
 def select(function_code):
     # Create item
     if function_code == "C" or function_code == "c":
@@ -74,9 +79,14 @@ def select(function_code):
         mark_completed(mark_input)
         return True
 
+    elif function_code == "W" or function_code == "w":
+        unmark_input = input("Index to unmark: ")
+        unmark_completed(unmark_input)
+        return True
+
     # Catch all
     else:
-        print("\033[0;31m\ \ \ Unknown Option \ \ \ \033[0m")
+        print("\033[0;31m === Unknown Option === \033[0m")
     return True
 
 def user_input(prompt):
@@ -125,5 +135,5 @@ def test():
 running = True
 while running:
     selection = user_input(
-        "Press C to add to list, R to Read from list, P to display list, U to update a slot, D to delete clothing, and Q to quit: ")
+        "Press \033[0;32mC\033[0;0m to add to list, \033[1;35mR\033[0;0m to Read from list, \033[0;34mP\033[0;0m to display list, \033[0;36mM\033[0;0m to checkmark completed, \033[0;33mW\033[0;0m to uncheckmark completed, \033[1;33mU\033[0;0m to update a slot, \033[1;31mD\033[0;0m to delete clothing, and \033[0;31mQ\033[0;0m to quit: ")
     running = select(selection)
